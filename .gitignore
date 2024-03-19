@@ -2,6 +2,7 @@
 node_modules
 /dist
 **/*.Identifier
+venv/
 
 
 # local env files
