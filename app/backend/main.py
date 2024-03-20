@@ -2,10 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 from routes.app import App
 from routes.routes import routerInstance
-from database.connection import DBConnectionHandler
-
-dbConnectionHandle = DBConnectionHandler()
-dbConnectionHandle.connectToDb()
+from controllers.TravelQuotesController import TravelQuotesController
 
 app_instance = App().getAppInstance()
 
