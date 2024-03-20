@@ -1,9 +1,11 @@
 from fastapi import APIRouter
+from controllers.TravelQuotesController import TravelQuotesController
 
 routerInstance = APIRouter()
 
-@routerInstance.get("/")
+@routerInstance.get("/trips")
 def home():
-    return "OK"
+  response = TravelQuotesController().getAllTrips()
+  return response
 
 

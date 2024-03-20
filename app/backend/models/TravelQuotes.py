@@ -2,9 +2,8 @@ from typing import Dict, List
 import json
 
 class TravelQuotes:
-	def __init__(self, dbConnection) -> None:
-		self.__collectionName = "TravelsQuotes"
-		self.__dbConnection = dbConnection
+	def __init__(self) -> None:
+		pass
 
 	def readJsonFileAndProcess(self, filePath) -> List[Dict]:
 			try:
