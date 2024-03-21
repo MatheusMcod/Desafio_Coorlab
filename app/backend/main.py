@@ -4,8 +4,6 @@ from routes.app import App
 from routes.routes import routerInstance
 from controllers.TravelQuotesController import TravelQuotesController
 
-#data = TravelQuotesController().getAllTrips()
-
 app_instance = App().getAppInstance()
 
 app_instance.include_router(routerInstance)
