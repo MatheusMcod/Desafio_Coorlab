@@ -5,16 +5,30 @@ class TravelQuotes:
 	def __init__(self) -> None:
 		pass
 
-	def readJsonFileAndProcess(self, filePath) -> List[Dict]:
-			try:
-				with open(filePath, 'r') as file:
-					jsonData = json.load(file)
-					if not isinstance(jsonData.get("transport"), list):
-						raise ValueError("JSON file data is not a list")
-					return jsonData
-			except FileNotFoundError:
-					print(f"The file '{filePath}' was not found.")
-			except json.JSONDecodeError:
-					print(f"Error decoding JSON file '{filePath}'.")
-			except ValueError as e:
-					print(e)
+	async def readTransportFileAndProcess(self, filePath: str) -> Dict[str, List]:
+		try:
+			with open(filePath, 'r') as file:
+				jsonData = json.load(file)
+				if not isinstance(jsonData.get("transport"), list):
+					raise ValueError("JSON file data is not a list")
+				return jsonData
+		except FileNotFoundError:
+			print(f"The file '{filePath}' was not found.")
+		except json.JSONDecodeError:
+			print(f"Error decoding JSON file '{filePath}'.")
+		except ValueError as e:
+			print(e)
+
+	async def readCitysFileAndProcess(self, filePath: str) -> Dict[str, List]:
+		try:
+			with open(filePath, 'r') as file:
+				jsonData = json.load(file)
+				if not isinstance(jsonData.get("citys"), list):
+					raise ValueError("JSON file data is not a list")
+				return jsonData
+		except FileNotFoundError:
+			print(f"The file '{filePath}' was not found.")
+		except json.JSONDecodeError:
+			print(f"Error decoding JSON file '{filePath}'.")
+		except ValueError as e:
+			print(e)
