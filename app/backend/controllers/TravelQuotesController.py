@@ -42,18 +42,18 @@ class TravelQuotesController:
 		except Exception as e:
 			raise HTTPException(status_code=500, detail="Error searching trips: " + str(e))
 
-	async def searchAllCitys(self) -> Dict[str, List]:
+	async def searchAllCitis(self) -> Dict[str, List]:
 		try:
-			citys = await TravelQuotes().readCitysFileAndProcess('database/citys.json')
-			return jsonable_encoder(citys)
+			citis = await TravelQuotes().readCitisFileAndProcess('database/citis.json')
+			return jsonable_encoder(citis)
 		except ValueError as ve:
 			raise HTTPException(status_code=400, detail=str(ve))
 		except Exception as e:
-			raise HTTPException(status_code=500, detail="Error searching citys: " + str(e))
+			raise HTTPException(status_code=500, detail="Error searching citis: " + str(e))
 
 	async def searchDestinationTrips(self, destination: str) -> Dict[str, List]:
-		validDestinations = await TravelQuotes().readCitysFileAndProcess('database/citys.json')
-		if destination not in validDestinations["citys"]:
+		validDestinations = await TravelQuotes().readCitisFileAndProcess('database/citis.json')
+		if destination not in validDestinations["citis"]:
 			raise HTTPException(status_code=400, detail="The destination provided is not valid.")
 
 		try:

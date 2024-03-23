@@ -9,9 +9,9 @@ async def searchAllTrips() -> Dict[str, List]:
   response = await TravelQuotesController().searchAllTrips()
   return response
 
-@routerInstance.get("/citys")
-async def searchAllCitys() -> Dict[str, List]:
-  response = await TravelQuotesController().searchAllCitys()
+@routerInstance.get("/citis")
+async def searchAllCitis() -> Dict[str, List]:
+  response = await TravelQuotesController().searchAllCitis()
   return response
 
 @routerInstance.get("/trips/{destination}")
