@@ -12,7 +12,7 @@
 					<input type="password" placeholder="Digite sua senha" name="password" class="form-input px-4 lg:w-80 md:w-60 py-2 rounded-md focus:outline-none focus:ring">
 				</div>
 
-				<button type="button" class="bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline lg:w-80 md:w-60"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+				<button type="button" @click="redirectHome" class="bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline lg:w-80 md:w-60"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
 			</form>
     </div>
     <div class="lg:col-span-4 md:col-span-3 sm:col-span-2 flex justify-center items-center">
@@ -20,4 +20,14 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    redirectHome() {
+      this.$router.push('/home')
+    }
+  }
+}
+</script>
 
