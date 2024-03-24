@@ -5,7 +5,7 @@
 <template>
   <div class="grid h-screen grid-cols-6">
 		<nav class="col-span-1 bg-gray-800 text-white">
-			<div class="my-14 ml-5 w-52">
+			<div class="my-14 ml-5 w-52 lg:w-32 md:w-24">
 				<img src="../assets/logo.png" alt="Logo da empresa.">
 			</div>
 			<ul class="text-center">
@@ -14,7 +14,7 @@
 		</nav>
 		<main class="col-span-5">
 			<div class="w-full h-20 shadow-md shadow-gray-500 p-8"></div>
-			<div class="flex justify-center"><TripsCalculator /></div>
+			<div class="flex justify-center h-full"><TripsCalculator /></div>
 		</main>
   </div>
 </template>

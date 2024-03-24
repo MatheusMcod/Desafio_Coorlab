@@ -1,23 +1,23 @@
 <template>
-  <div class="col-span-6 mt-16 w-3/4 shadow-md shadow-gray-500 p-8">
+  <div class="col-span-6 mt-16 w-full h-3/5 lg:w-3/4 lg:shadow-md lg:shadow-gray-500 p-8">
     <div class="bg-gray-800 w-full h-16 rounded flex items-center pl-10 font-bold">
       <h2 class="text-2xl text-white"><i class="fa-solid fa-truck-arrow-right mr-1"></i> Calculadora de Viagem</h2>
     </div>
 
-    <div class="grid grid-cols-2 height">
-      <div class="bg-gray-300 w-3/4 h-5/6 mt-8 ml-8 flex flex-col items-center justify-center rounded">
-        <h2 class="mb-5 text-2xl font-semibold"><i class="fa-solid fa-hand-holding-dollar"></i> Calcule o Valor da Viagem</h2>
-        <form @submit.prevent="searchTrips">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 h-full">
+      <div class="bg-gray-300 w-full h-auto lg:h-5/6 flex flex-col items-center justify-center rounded p-8">
+        <h2 class="mb-5 text-2xl lg:text-base md:text-sm font-semibold break-words"><i class="fa-solid fa-hand-holding-dollar"></i> Calcule o Valor da Viagem</h2>
+        <form @submit.prevent="searchTrips" class="w-full">
           <label for="cities" class="block text-black-700 font-semibold mb-2">Destino</label>
           <CustomDropdown v-model="selectedCiti" :options="cities" @input="handleOptionSelected" placeholder="Selecione uma cidade" name="cities" />
           <label for="date" class="block text-black-700 font-semibold mb-2">Data</label>
-          <input type="date" name="date" id="date" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer" v-model="selectedDate">
-          <button type="submit" class="block bg-blue-500 hover:bg-blue-700 font-semibold rounded focus:outline-none focus:shadow-outline w-52 h-8 mt-10 mx-auto">Buscar</button>
+          <input type="date" name="date" id="date" class="w-full form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer" v-model="selectedDate">
+          <button type="submit" class="block bg-blue-500 hover:bg-blue-700 font-semibold rounded focus:outline-none focus:shadow-outline w-full h-10 mt-6">Buscar</button>
         </form>
       </div>
 
-      <div class="flex flex-col items-center justify-center">
-        <div>
+      <div class="w-full h-auto lg:h-3/4 flex flex-col items-center justify-center rounded p-4">
+        <div class="w-full h-full">
           <showTrips :trips="tripsData"/>
         </div>
       </div>
@@ -25,7 +25,6 @@
     <ModalAlert v-if="showModal" @close="closeModal" />
   </div>
 </template>
-
 <script>
 import ShowTrips from './ShowTrips.vue'
 import ModalAlert from './ModalAlert.vue'
