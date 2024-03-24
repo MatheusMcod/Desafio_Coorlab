@@ -19,11 +19,11 @@ class TravelQuotes:
 		except ValueError as e:
 			print(e)
 
-	async def readCitysFileAndProcess(self, filePath: str) -> Dict[str, List]:
+	async def readCitiesFileAndProcess(self, filePath: str) -> Dict[str, List]:
 		try:
 			with open(filePath, 'r') as file:
 				jsonData = json.load(file)
-				if not isinstance(jsonData.get("citys"), list):
+				if not isinstance(jsonData.get("cities"), list):
 					raise ValueError("JSON file data is not a list")
 				return jsonData
 		except FileNotFoundError:

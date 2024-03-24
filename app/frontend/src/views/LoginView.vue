@@ -1,5 +1,5 @@
 <template>
-	<div class="container-lg h-screen grid grid-cols-2 lg:grid-cols-6 md:grid-cols-5">
+	<main class="container-lg h-screen grid grid-cols-2 lg:grid-cols-6 md:grid-cols-5">
     <div class="bg-gray-300 h-full w-full col-span-2 flex flex-col justify-center items-center">
 			<h1 class="text-4xl font-bold text-black-800 mb-8 text-center">Faça o Login</h1>
 			<form>
@@ -16,9 +16,9 @@
 			</form>
     </div>
     <div class="lg:col-span-4 md:col-span-3 sm:col-span-2 flex justify-center items-center">
-			<img src="../assets/login.svg" alt="">
+			<img src="../assets/login.svg" alt="Imagem de um homem abrindo uma porta.">
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
