@@ -8,9 +8,9 @@
 		<div class="grid grid-cols-2 height">
 			<div class="bg-gray-300 w-3/4 h-5/6 mt-8 ml-8 flex flex-col items-center justify-center rounded">
 				<h2 class="mb-5 text-2xl font-semibold"><i class="fa-solid fa-hand-holding-dollar"></i> Calcule o Valor da Viagem</h2>
-				<form>
+				<form @submit.prevent="searchTrips">
 					<label for="citis" class="block text-black-700 font-semibold mb-2">Destino</label>
-					<select id="citis" name="citis" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer"></select>
+					<select id="citis" name="citis" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer" v-model="selectedCiti"><option></option></select>
 					<label for="date" class="block text-black-700 font-semibold mb-2">Data</label>
 					<input type="date" name="date" id="date" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer">
 					<button type="submit" class="block bg-blue-500 hover:bg-blue-700 font-semibold rounded focus:outline-none focus:shadow-outline w-52 h-8 mt-10 mx-auto">Buscar</button>
@@ -18,32 +18,62 @@
 			</div>
 
 			<div class="flex flex-col items-center justify-center">
-				<h2 class="text-center text-xl font-bold">Nenhum dado selecionado...</h2>
+				<div>
+					<showTrips :trips="tripsData"/>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	async function searchCities() {
-		try {
-			const response = await fetch('http://localhost:3000/citis');
-			const data = await response.json();
+	import showTrips from './showTrips.vue'
+	export default {
+  mounted() {
+    this.searchCities();
+  },
+	components: {
+		showTrips
+	},
+  methods: {
+    async searchCities() {
+      try {
+        const response = await fetch('http://localhost:3000/citis');
+        const data = await response.json();
 
-			const datalist = document.getElementById('citis');
-			datalist.innerHTML = '';
+        const datalist = document.getElementById('citis');
+        datalist.innerHTML = '';
+				datalist.appendChild(document.createElement('option'));
 
-			data.citis.forEach(citi => {
-					const option = document.createElement('option');
-					option.textContent = citi;
-					datalist.appendChild(option);
-			});
-		} catch (error) {
-				console.error('Erro ao obter cidades:', error);
-		}
+        data.citis.forEach(citi => {
+          const option = document.createElement('option');
+          option.textContent = citi;
+          datalist.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Erro ao obter cidades:', error);
+      }
+    },
+
+		async searchTrips() {
+			try {
+				console.log(this.selectedCiti)
+				const response = await fetch(`http://localhost:3000/trips/${this.selectedCiti}`);
+				const data = await response.json();
+				console.log(data.trips)
+				this.tripsData = data.trips;
+			} catch (error) {
+					console.error('Erro ao obter cidades:', error);
+			}
+    }
+  },
+	data() {
+    return {
+      selectedCiti: '',
+			tripsData: []
+  	}
 	}
-
-	document.addEventListener('DOMContentLoaded', searchCities);
+}
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <script setup>
-import TripsCalculator from '../components/TripsCalculator.vue'
+	import TripsCalculator from '../components/TripsCalculator.vue'
 </script>
 
 <template>

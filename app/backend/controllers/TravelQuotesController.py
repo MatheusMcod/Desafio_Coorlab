@@ -59,7 +59,7 @@ class TravelQuotesController:
 		try:
 			trips = await TravelQuotes().readTransportFileAndProcess('database/transport.json')
 			destinationTrips =	self.__findCheapestTripAndComfortableTrip(trips["transport"], destination)
-			return	jsonable_encoder(destinationTrips)
+			return	{"trips": jsonable_encoder(destinationTrips)}
 		except ValueError as ve:
 			raise HTTPException(status_code=400, detail=str(ve))
 		except Exception as e:
