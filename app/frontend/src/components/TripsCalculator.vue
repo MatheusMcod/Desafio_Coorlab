@@ -12,7 +12,7 @@
 					<label for="citis" class="block text-black-700 font-semibold mb-2">Destino</label>
 					<select id="citis" name="citis" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer" v-model="selectedCiti"><option></option></select>
 					<label for="date" class="block text-black-700 font-semibold mb-2">Data</label>
-					<input type="date" name="date" id="date" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer">
+					<input type="date" name="date" id="date" class="w-80 form-input px-4 py-2 rounded-md focus:outline-none hover:ring cursor-pointer" v-model="selectedDate">
 					<button type="submit" class="block bg-blue-500 hover:bg-blue-700 font-semibold rounded focus:outline-none focus:shadow-outline w-52 h-8 mt-10 mx-auto">Buscar</button>
 				</form>
 			</div>
@@ -23,17 +23,21 @@
 				</div>
 			</div>
 		</div>
+		<ModalAlert v-if="showModal" @close="closeModal" />
 	</div>
 </template>
 
 <script>
-	import showTrips from './showTrips.vue'
+	import ShowTrips from './ShowTrips.vue'
+	import ModalAlert from './ModalAlert.vue';
+
 	export default {
   mounted() {
     this.searchCities();
   },
 	components: {
-		showTrips
+		ShowTrips,
+		ModalAlert
 	},
   methods: {
     async searchCities() {
@@ -57,7 +61,11 @@
 
 		async searchTrips() {
 			try {
-				console.log(this.selectedCiti)
+				if (!this.selectedCiti || !this.selectedDate) {
+          this.showModal = true;
+          return;
+        }
+
 				const response = await fetch(`http://localhost:3000/trips/${this.selectedCiti}`);
 				const data = await response.json();
 				console.log(data.trips)
@@ -65,12 +73,18 @@
 			} catch (error) {
 					console.error('Erro ao obter cidades:', error);
 			}
+    },
+
+		closeModal() {
+      this.showModal = false;
     }
   },
 	data() {
     return {
       selectedCiti: '',
-			tripsData: []
+			tripsData: [],
+			showModal: false,
+			selectedDate: ''
   	}
 	}
 }
